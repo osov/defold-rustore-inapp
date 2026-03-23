@@ -29,16 +29,33 @@ Deeplink activity и meta-data подключаются автоматическ
 
 ### AndroidManifest.xml
 
-RuStore SDK требует `tools:replace="android:label"` в `<application>` вашего главного манифеста. Добавьте этот атрибут, если его ещё нет:
+В вашем главном манифесте необходимо:
+
+1. Добавить `tools:replace="android:label"` в `<application>` (требование RuStore SDK)
+2. **Убрать LAUNCHER intent-filter у `DefoldActivity`** — точкой входа станет `RuStoreIntentFilterActivity` из расширения (обрабатывает возврат из оплаты и запускает `DefoldActivity`)
 
 ```xml
-<application
-    ...
-    tools:replace="android:label"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     ...>
-```
 
-Также убедитесь, что объявлен namespace `xmlns:tools="http://schemas.android.com/tools"` в теге `<manifest>`.
+    <application
+        ...
+        tools:replace="android:label"
+        ...>
+
+        <!-- Убрать intent-filter с LAUNCHER у DefoldActivity -->
+        <activity android:name="com.dynamo.android.DefoldActivity"
+            ...
+            android:exported="true"
+            android:launchMode="singleTask">
+            <meta-data android:name="android.app.lib_name" android:value="{{exe-name}}" />
+            <!-- НЕТ intent-filter с MAIN/LAUNCHER здесь -->
+        </activity>
+
+    </application>
+</manifest>
+```
 
 ## Lua API
 
