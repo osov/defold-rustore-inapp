@@ -5,9 +5,7 @@
 
     <uses-sdk android:minSdkVersion="{{android.minimum_sdk_version}}" android:targetSdkVersion="{{android.target_sdk_version}}" />
 
-    <application
-        android:label="{{project.title}}"
-        tools:replace="android:label">
+    <application>
 
         <!-- RuStore Pay: Deeplink activity -->
         <activity android:name="ru.rustore.defold.pay.RuStoreIntentFilterActivity"
