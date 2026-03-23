@@ -1,20 +1,20 @@
 # RuStore InApp — Defold Extension
 
-Defold extension for in-app purchases via [RuStore Pay SDK](https://www.rustore.ru/help/sdk/pay/defold/10-1-0).
+Расширение Defold для встроенных покупок через [RuStore Pay SDK](https://www.rustore.ru/help/sdk/pay/defold/10-1-0).
 
-## Installation
+## Установка
 
-Open `game.project` and add to **Dependencies** (Project → Dependencies):
+Откройте `game.project` и добавьте в **Dependencies** (Project -> Dependencies):
 
 ```
 https://github.com/osov/defold-rustore-inapp/archive/main.zip
 ```
 
-## Setup
+## Настройка
 
-### game.project
+### 1. game.project
 
-Add the following section to your `game.project`:
+Добавьте секцию `[rustore]` в ваш `game.project`:
 
 ```ini
 [rustore]
@@ -23,15 +23,13 @@ deeplink_scheme = your.package.name.rustore.scheme
 ```
 
 - `console_app_id` — ID приложения из [RuStore Console](https://console.rustore.ru/)
-- `deeplink_scheme` — deeplink-схема для возврата из оплаты (ASCII, RFC-3986)
+- `deeplink_scheme` — deeplink-схема для возврата из оплаты (ASCII, RFC-3986), например `com.mycompany.mygame.rustore.scheme`
 
-Deeplink activity и meta-data подключаются автоматически через манифест расширения.
-
-### AndroidManifest.xml
+### 2. AndroidManifest.xml
 
 В вашем главном манифесте необходимо:
 
-1. Добавить `tools:replace="android:label"` в `<application>` (требование RuStore SDK)
+1. Добавить `xmlns:tools` в `<manifest>` и `tools:replace="android:label"` в `<application>` (требование RuStore SDK)
 2. **Убрать LAUNCHER intent-filter у `DefoldActivity`** — точкой входа станет `RuStoreIntentFilterActivity` из расширения (обрабатывает возврат из оплаты и запускает `DefoldActivity`)
 
 ```xml
@@ -41,21 +39,23 @@ Deeplink activity и meta-data подключаются автоматическ
 
     <application
         ...
-        tools:replace="android:label"
-        ...>
+        tools:replace="android:label">
 
-        <!-- Убрать intent-filter с LAUNCHER у DefoldActivity -->
         <activity android:name="com.dynamo.android.DefoldActivity"
             ...
             android:exported="true"
             android:launchMode="singleTask">
             <meta-data android:name="android.app.lib_name" android:value="{{exe-name}}" />
-            <!-- НЕТ intent-filter с MAIN/LAUNCHER здесь -->
+            <!-- НЕ добавляйте сюда intent-filter с MAIN/LAUNCHER -->
         </activity>
 
     </application>
 </manifest>
 ```
+
+Расширение автоматически добавляет:
+- `RuStoreIntentFilterActivity` как LAUNCHER (точка входа + обработка deeplink)
+- meta-data с `console_app_id`, `deeplink_scheme` и `internal_config_key`
 
 ## Lua API
 
@@ -124,12 +124,12 @@ rustorepay.get_purchase(purchase_id)        -- одна покупка
 rustorepay.get_user_authorization_status()
 ```
 
-## Events
+## События
 
 Все ответы приходят через `rustorecore.connect(channel, callback)`:
 
-| Channel | Callback args |
-|---------|--------------|
+| Channel | Аргументы callback |
+|---------|-------------------|
 | `rustore_pay_on_get_purchase_availability_success` | `self, channel, json` |
 | `rustore_pay_on_get_purchase_availability_failure` | `self, channel, error` |
 | `rustore_pay_on_get_products_success` | `self, channel, json` |
@@ -145,7 +145,7 @@ rustorepay.get_user_authorization_status()
 | `rustore_pay_on_cancel_two_step_purchase_success` | `self, channel, value` |
 | `rustore_pay_on_cancel_two_step_purchase_failure` | `self, channel, error, id` |
 
-## Example
+## Пример
 
 ```lua
 function init(self)
@@ -170,11 +170,11 @@ function init(self)
 end
 ```
 
-## Platform
+## Платформа
 
-Android only (minimum SDK 24). On other platforms `rustorecore` and `rustorepay` modules are empty stubs.
+Только Android (minimum SDK 24). На остальных платформах модули `rustorecore` и `rustorepay` — пустые заглушки.
 
-## Links
+## Ссылки
 
 - [RuStore Pay SDK Defold Docs](https://www.rustore.ru/help/sdk/pay/defold/10-1-0)
 - [Official Example](https://gitflic.ru/project/rustore/rustore-defold-pay)
