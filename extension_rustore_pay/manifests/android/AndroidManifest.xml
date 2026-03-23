@@ -7,10 +7,22 @@
 
     <application>
 
-        <!-- RuStore Pay: Deeplink activity -->
+        <!-- Remove LAUNCHER from DefoldActivity so RuStoreIntentFilterActivity is the only entry point -->
+        <activity android:name="com.dynamo.android.DefoldActivity">
+            <intent-filter tools:node="remove">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- RuStore Pay: Entry point + Deeplink activity -->
         <activity android:name="ru.rustore.defold.pay.RuStoreIntentFilterActivity"
             android:theme="@android:style/Theme.NoDisplay"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
