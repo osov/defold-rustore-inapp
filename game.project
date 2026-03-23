@@ -18,6 +18,7 @@ shared_state = 1
 
 [android]
 package = com.myApp.name
+manifest = /AndroidManifest.xml
 minimum_sdk_version = 24
 
 [library]
