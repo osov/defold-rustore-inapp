@@ -7,7 +7,7 @@ Defold extension for in-app purchases via [RuStore Pay SDK](https://www.rustore.
 Open `game.project` and add to **Dependencies** (Project → Dependencies):
 
 ```
-https://github.com/YOUR_USERNAME/defold-rustore-inapp/archive/main.zip
+https://github.com/osov/defold-rustore-inapp/archive/main.zip
 ```
 
 ## Setup

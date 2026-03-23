@@ -17,7 +17,7 @@ style = Fullscreen
 shared_state = 1
 
 [android]
-package = com.BirdsGame.SeaBatle
+package = com.myApp.name
 minimum_sdk_version = 24
 
 [library]
