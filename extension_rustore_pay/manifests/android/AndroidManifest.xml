@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="{{android.package}}">
+
+    <uses-sdk android:minSdkVersion="{{android.minimum_sdk_version}}" android:targetSdkVersion="{{android.target_sdk_version}}" />
+
+    <application tools:replace="android:label">
+
+        <!-- RuStore Pay: Deeplink activity -->
+        <activity android:name="ru.rustore.defold.pay.RuStoreIntentFilterActivity"
+            android:theme="@android:style/Theme.NoDisplay"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="{{rustore.deeplink_scheme}}" />
+            </intent-filter>
+        </activity>
+
+        <!-- RuStore Pay: Deeplink scheme -->
+        <meta-data
+            android:name="sdk_pay_scheme_value"
+            android:value="{{rustore.deeplink_scheme}}" />
+
+        <!-- RuStore Pay: App ID and config key -->
+        <meta-data
+            android:name="console_app_id_value"
+            android:value="{{rustore.console_app_id}}" />
+        <meta-data
+            android:name="internal_config_key"
+            android:value="defold" />
+
+    </application>
+</manifest>
