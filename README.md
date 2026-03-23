@@ -25,7 +25,20 @@ deeplink_scheme = your.package.name.rustore.scheme
 - `console_app_id` — ID приложения из [RuStore Console](https://console.rustore.ru/)
 - `deeplink_scheme` — deeplink-схема для возврата из оплаты (ASCII, RFC-3986)
 
-AndroidManifest с deeplink activity и meta-data подключается автоматически через расширение.
+Deeplink activity и meta-data подключаются автоматически через манифест расширения.
+
+### AndroidManifest.xml
+
+RuStore SDK требует `tools:replace="android:label"` в `<application>` вашего главного манифеста. Добавьте этот атрибут, если его ещё нет:
+
+```xml
+<application
+    ...
+    tools:replace="android:label"
+    ...>
+```
+
+Также убедитесь, что объявлен namespace `xmlns:tools="http://schemas.android.com/tools"` в теге `<manifest>`.
 
 ## Lua API
 
