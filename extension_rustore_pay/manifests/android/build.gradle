@@ -1,0 +1,12 @@
+repositories {
+    google()
+    mavenCentral()
+    maven {
+        url = uri("https://artifactory-external.vkpartner.ru/artifactory/maven")
+    }
+}
+
+dependencies {
+    implementation "ru.rustore.sdk:pay:10.1.0"
+    implementation "com.google.code.gson:gson:2.10.1"
+}

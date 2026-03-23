@@ -1,0 +1,29 @@
+[project]
+title = RuStore InApp
+version = 1.0
+
+[bootstrap]
+main_collection = /main/main.collectionc
+
+[input]
+game_binding = /builtins/input/all.input_bindingc
+
+[display]
+width = 720
+height = 1280
+style = Fullscreen
+
+[script]
+shared_state = 1
+
+[android]
+package = com.BirdsGame.SeaBatle
+manifest = /AndroidManifest.xml
+minimum_sdk_version = 24
+
+[library]
+include_dirs = extension_rustore_core extension_rustore_pay
+
+[rustore]
+console_app_id = APP_ID
+deeplink_scheme = DEEP_SCHEME

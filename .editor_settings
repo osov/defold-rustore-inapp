@@ -1,0 +1,55 @@
+{
+  :build {
+    :lint-code false
+    :texture-compression false
+  }
+  :bundle {
+    :android {
+      :architectures #{
+        "arm64-android"
+        "armv7-android"
+      }
+      :build_report false
+      :bundle_format #{
+        "apk"
+      }
+      :contentless false
+      :install true
+      :key-pass "D:\\Android\\Keys\\2023_games.txt"
+      :keystore "D:\\Android\\Keys\\2023_games.jks"
+      :keystore-pass "D:\\Android\\Keys\\2023_games.txt"
+      :launch true
+      :liveupdate false
+      :texture_compression "enabled"
+      :variant "debug"
+      :with_symbols false
+    }
+    :last-bundle-command :project.bundle-android
+    :output-directory "D:\\Defold\\projects\\builds"
+  }
+  :code {
+    :breakpoints [
+    ]
+    :find {
+      :case-sensitive true
+      :replacement "gameImage"
+      :term "use_height_projection"
+    }
+  }
+  :workflow {
+    :open-tabs [
+      [
+        [
+          "/game.project"
+          :cljfx-form-view
+        ]
+      ]
+    ]
+    :recent-files [
+      [
+        "/game.project"
+        :cljfx-form-view
+      ]
+    ]
+  }
+}
